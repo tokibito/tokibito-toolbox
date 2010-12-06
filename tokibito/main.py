@@ -6,9 +6,16 @@ from google.appengine.ext.webapp import util, Request
 import config
 from tokky.exceptions import Http404
 
-# application cache variable
-_app_cache = {}
+_url_map = []
 
+def _init_url_map():
+    # initialize url mapping
+    import re
+    global _url_map
+    patterns = []
+    for pattern, app in config.APPS:
+        patterns.append([re.compile(pattern), app])
+    _url_map = patterns
 
 def get_traceback(exc_info):
     import traceback
@@ -18,36 +25,22 @@ def get_traceback(exc_info):
     except UnicodeDecodeError:
         return ret
 
-
-def get_application(name):
-    global _app_cache
-    from tokky.loader import load_application
-    if name in _app_cache:
-        app = _app_cache[name]
-    else:
-        app = load_application(name)
-        _app_cache[name] = app
+def apply_middleware(app):
+    from tokky.loader import load_module
+    for middleware_name in config.MIDDLEWARE:
+        middleware = load_module(middleware_name)
+        app = middleware(app)
     return app
 
-
-def not_found_middleware(app):
-    def _inner(environ, start_response):
-        try:
-            return app(environ, start_response)
-        except Http404, e:
-            not_found_app = get_application(config.NOT_FOUND_APP)
-            return not_found_app(environ, start_response)
-    _inner.__func__ = app
-    return _inner
-
-
-@not_found_middleware
 def application(environ, start_response):
     # entry point
+    global _url_map
+    if not _url_map:
+        _init_url_map()
     request = Request(environ)
     match_app = ''
-    for prefix, app in config.APPS:
-        if request.path.startswith(prefix):
+    for regexp, app in _url_map:
+        if regexp.match(request.path):
             match_app = app
             break
     else:
@@ -55,19 +48,23 @@ def application(environ, start_response):
         raise Http404
 
     # select app
+    from tokky.loader import get_application
     real_app = get_application(match_app)
     # run app
     return real_app(environ, start_response)
 
+_application = None
 
 def main():
     # logging exception
     try:
-        util.run_wsgi_app(application)
+        global _application
+        if not _application:
+            _application = apply_middleware(application)
+        util.run_wsgi_app(_application)
     except Exception, e:
         logging.error(get_traceback(sys.exc_info()))
         raise
-
 
 if __name__ == '__main__':
     main()

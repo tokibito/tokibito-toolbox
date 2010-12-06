@@ -1,7 +1,12 @@
 # installed apps
 APPS = [
-    ('/mypage/', 'apps.mypage.application'),
-    ('', 'apps.pages.application')
+    ('^/$', 'apps.toppage.application'),
+    ('^/test\.html$', 'apps.pages.application'),
+]
+
+# global middleware
+MIDDLEWARE = [
+    'tokky.middleware.not_found_middleware',
 ]
 
 # not found app
