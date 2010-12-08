@@ -8,11 +8,6 @@ import config
 from tokky.exceptions import Http404
 
 _url_map = []
-_setup_syspath = None
-
-def setup_syspath():
-    from tokky.directory import get_base_dir
-    sys.path = [os.path.join(get_base_dir(), 'library.zip')] + sys.path
 
 def _init_url_map():
     # initialize url mapping
@@ -64,12 +59,7 @@ _application = None
 def main():
     # logging exception
     try:
-        global _setup_syspath, _application
-
-        if not _setup_syspath:
-            logging.info("sys.path setup.")
-            setup_syspath()
-            _setup_syspath = True
+        global _application
         if not _application:
             logging.info("application was spinned up.")
             _application = apply_middleware(application)
