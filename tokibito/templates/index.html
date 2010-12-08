@@ -12,9 +12,9 @@
 new TWTR.Widget({
   version: 2,
   type: 'profile',
-  rpp: 3,
+  rpp: 4,
   interval: 6000,
-  width: 500,
+  width: 600,
   height: 300,
   theme: {
     shell: {
@@ -33,7 +33,7 @@ new TWTR.Widget({
     live: false,
     hashtags: true,
     timestamp: true,
-    avatars: false,
+    avatars: true,
     behavior: 'all'
   }
 }).render().setUser('tokibito').start();
