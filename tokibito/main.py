@@ -41,7 +41,12 @@ def application(environ, start_response):
     request = Request(environ)
     match_app = ''
     for regexp, app in _url_map:
-        if regexp.match(request.path):
+        match_obj = regexp.match(request.path)
+        if match_obj:
+            # path info hack
+            path_prefix = environ['PATH_PREFIX'] = match_obj.group()
+            path_info = environ['ROOT_PATH_INFO'] = environ['PATH_INFO']
+            environ['PATH_INFO'] = '/' + path_info[len(path_prefix):]
             match_app = app
             break
     else:

@@ -1,6 +1,7 @@
 # installed apps
 APPS = [
     ('^/$', 'apps.toppage.application'),
+    ('^/presentation/', 'apps.presentation.handlers.application'),
     ('^/test\.html$', 'apps.pages.application'),
 ]
 
