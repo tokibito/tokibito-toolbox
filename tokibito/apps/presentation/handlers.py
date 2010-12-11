@@ -8,6 +8,7 @@ class PresentationPageHandler(TemplatePageHandler):
     def pre_render(self, *args, **kwargs):
         from google.appengine.ext.webapp import template
         import docutils
+        from apps.presentation import pygments_support
         from docutils.core import publish_parts
         template.register_template_library('apps.presentation.templatetags.s6helper')
 
