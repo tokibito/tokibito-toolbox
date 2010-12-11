@@ -17,12 +17,12 @@ def get_presentation_all(use_cache=True, cache_timeout=600):
 def get_presentation(slug, use_cache=True, cache_timeout=3600):
     cache_key = CACHEKEY_PRESENATAION % slug
     if use_cache:
-        objects = memcache.get(cache_key)
+        obj = memcache.get(cache_key)
     else:
-        objects = None
-    if not objects:
+        obj = None
+    if not obj:
         from apps.presentation.models import Presentation
         from tokky.misc.query import get_by_slug
         obj = get_by_slug(Presentation, slug)
         memcache.add(cache_key, obj, cache_timeout)
-    return objects
+    return obj
