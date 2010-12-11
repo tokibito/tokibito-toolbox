@@ -58,7 +58,10 @@ new TWTR.Widget({
 <h3>Presentations</h3>
 <ul>
   {% for obj in presentation_objects %}
-    <li><a href="/presentation/{{ obj.slug }}.html">{{ obj.title }}</a> ({{ obj.created_at|date:"Y/m/d H:i" }})</li>
+    <li>
+      <a href="/presentation/{{ obj.slug }}.html">{{ obj.title }}</a> ({{ obj.created_at|date:"Y/m/d H:i" }})
+      {% if forloop.first %}<br/><iframe src="/presentation/{{ obj.slug }}.html" width="400" height="300"></iframe>{% endif %}
+    </li>
   {% endfor %}
 </ul>
 
