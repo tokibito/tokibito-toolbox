@@ -17,10 +17,12 @@ class TemplatePageHandler(webapp.RequestHandler):
         return self.request.environ.get('PATH_PREFIX') or ''
 
     def render(self, *args, **kwargs):
+        import config
         from google.appengine.ext.webapp import template
         self.pre_render(*args, **kwargs)
         context = {
             'path_prefix': self.get_pathprefix(),
+            'MEDIA_URL': config.MEDIA_URL,
         }
         context.update(self.get_context(*args, **kwargs))
         return template.render(self.template_name, context)

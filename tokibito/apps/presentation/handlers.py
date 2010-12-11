@@ -9,7 +9,7 @@ class PresentationPageHandler(TemplatePageHandler):
         from google.appengine.ext.webapp import template
         import docutils
         from docutils.core import publish_parts
-        template.register_template_library('django.contrib.markup.templatetags.markup')
+        template.register_template_library('apps.presentation.templatetags.s6helper')
 
     def get_context(self, slug):
         from apps.presentation.models import Presentation

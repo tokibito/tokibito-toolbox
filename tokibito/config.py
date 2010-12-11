@@ -12,3 +12,5 @@ MIDDLEWARE = [
 
 # not found app
 NOT_FOUND_APP = 'tokky.defaultapps.not_found'
+
+MEDIA_URL = '/'
