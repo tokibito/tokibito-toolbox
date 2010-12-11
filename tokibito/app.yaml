@@ -13,5 +13,9 @@ handlers:
 - url: /css
   static_dir: static/css
 
+- url: /presentation/create
+  script: main.py
+  login: admin
+
 - url: .*
   script: main.py
