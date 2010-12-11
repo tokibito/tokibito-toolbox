@@ -8,4 +8,3 @@ class Presentation(db.Model):
     body = db.TextProperty(required=True)
     slug = db.StringProperty(required=True, multiline=False)
     created_at = db.DateTimeProperty(auto_now_add=True)
-

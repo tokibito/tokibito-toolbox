@@ -12,10 +12,8 @@ class PresentationPageHandler(TemplatePageHandler):
         template.register_template_library('apps.presentation.templatetags.s6helper')
 
     def get_context(self, slug):
-        from apps.presentation.models import Presentation
-        from misc.query import get_by_slug
-        obj = get_by_slug(Presentation, slug)
-        return {'object': obj}
+        from apps.presentation import api
+        return {'object': api.get_presentation(slug=slug)}
 
 
 class PresentationCreateHandler(TemplatePageHandler):

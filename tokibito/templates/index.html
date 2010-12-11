@@ -54,6 +54,13 @@ new TWTR.Widget({
   <img src="http://static.nullpobug.com.s3.amazonaws.com/public/img/crosskylix4_96.jpg" width="96" height="96" alt="delphi fan"/>
 </div>
 
+<h3>Presentations</h3>
+<ul>
+  {% for obj in presentation_objects %}
+    <li><a href="/presentation/{{ obj.slug }}.html">{{ obj.title }}</a> ({{ obj.created_at|date:"Y/m/d H:i" }})</li>
+  {% endfor %}
+</ul>
+
 <h3>Books</h3>
 <div class="amazon">
   <a href="http://www.amazon.co.jp/o/ASIN/4048676938/tokibitossoft-22/ref=nosim"><img src="http://ecx.images-amazon.com/images/I/516EeFiyRUL._SL75_.jpg" alt="Google App Engineプログラミング入門"/></a>
