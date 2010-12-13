@@ -2,6 +2,8 @@ from google.appengine.ext import webapp
 
 from tokky.generics import TemplatePageHandler
 
+from apps.presentation_redirects import presentation_redirects_middleware
+
 class PresentationPageHandler(TemplatePageHandler):
     template_name = 'templates/presentation/page.html'
 
@@ -14,7 +16,11 @@ class PresentationPageHandler(TemplatePageHandler):
 
     def get_context(self, slug):
         from apps.presentation import api
-        return {'object': api.get_presentation(slug=slug)}
+        obj = api.get_presentation(slug=slug)
+        if not obj:
+            from tokky.exceptions import Http404
+            raise Http404
+        return {'object': obj}
 
 
 class PresentationCreateHandler(TemplatePageHandler):
@@ -36,7 +42,7 @@ class PresentationCreateHandler(TemplatePageHandler):
             self.response.out.write(result)
 
 
-application = webapp.WSGIApplication([
-    ('/(.*)\.html', PresentationPageHandler),
-    ('/create', PresentationCreateHandler),
-])
+application = presentation_redirects_middleware(webapp.WSGIApplication([
+    (r'/(.*)\.html', PresentationPageHandler),
+    (r'/create', PresentationCreateHandler),
+]))

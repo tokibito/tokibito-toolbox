@@ -11,4 +11,4 @@ class TopPageHandler(TemplatePageHandler):
             'presentation_objects': presentation_api.get_presentation_all()
         }
 
-application = webapp.WSGIApplication([('/', TopPageHandler)])
+application = webapp.WSGIApplication([(r'/', TopPageHandler)])

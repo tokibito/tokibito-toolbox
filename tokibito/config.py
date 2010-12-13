@@ -1,7 +1,7 @@
 # installed apps
 APPS = [
-    ('^/$', 'apps.toppage.application'),
-    ('^/presentation/', 'apps.presentation.handlers.application'),
+    (r'^/$', 'apps.toppage.application'),
+    (r'^/presentation/', 'apps.presentation.handlers.application'),
 ]
 
 # global middleware

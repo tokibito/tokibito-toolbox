@@ -26,3 +26,9 @@ class TemplatePageHandler(webapp.RequestHandler):
         }
         context.update(self.get_context(*args, **kwargs))
         return template.render(self.template_name, context)
+
+    def handle_exception(self, exception, debug_mode):
+        from tokky.exceptions import Http404
+        if isinstance(exception, Http404):
+            raise
+        super(TemplatePageHandler, self).handle_exception(exception, debug_mode)
