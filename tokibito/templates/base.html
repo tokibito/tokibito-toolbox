@@ -7,6 +7,7 @@
     <title>{% block title %}title{% endblock %}</title>
     {% block extra_head %}{% endblock %}
   </head>
+  {% block body %}
   <body>
     <div id="wrap">
       <div id="header">
@@ -20,4 +21,5 @@
       </div>
     </div>
   </body>
+  {% endblock body %}
 </html>

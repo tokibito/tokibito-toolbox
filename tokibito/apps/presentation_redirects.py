@@ -14,8 +14,6 @@ def presentation_redirects_middleware(application):
     # redirect from old url.
     def _application(environ, start_response):
         path = environ.get('PATH_INFO')
-        import logging
-        logging.info(path)
         redirect_url = redirect_url_mapping.get(path)
         if redirect_url:
             scheme = environ['wsgi.url_scheme']

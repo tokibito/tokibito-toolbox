@@ -7,6 +7,9 @@ class TemplatePageHandler(webapp.RequestHandler):
         result = self.render(*args, **kwargs)
         self.response.out.write(result)
 
+    def head(self, *args, **kwargs):
+        self.get(*args, **kwargs)
+
     def pre_render(self, *args, **kwargs):
         pass
 
