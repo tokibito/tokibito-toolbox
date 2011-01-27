@@ -4,6 +4,13 @@ APPS = [
     (r'^/presentation/', 'apps.presentation.handlers.application'),
 ]
 
+# admin config
+ADMIN_SITE = {
+    'APPS': [
+        (r'^/$', 'apps.admin.home'),
+    ],
+}
+
 # global middleware
 MIDDLEWARE = [
     'tokky.middleware.not_found_middleware',
