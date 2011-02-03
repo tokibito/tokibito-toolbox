@@ -1,0 +1,41 @@
+body,h1 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #FFFFFF;
+  background-color: #61766E;
+}
+
+a {
+  color: #F5F5F5;
+  text-decoration: underline;
+}
+  a:hover {
+    text-decoration: none;
+  }
+
+#header {
+  padding: 1em;
+  background-color: #394E46;
+  border-bottom: solid 2px #4D625A;
+  text-shadow: 0 -1px 0 #1B3028;
+}
+
+#footer {
+  padding: 1em;
+  background-color: #394E46;
+}
+
+#content {
+  padding: 0.5em 2em;
+}
+  #content h2 {
+    padding: 0.2em 0.5em;
+    border-bottom: solid 2px #394E46;
+  }
+  #content > h3 {
+    padding: 0.2em 0.4em;
+    border-bottom: solid 2px #394E46;
+  }

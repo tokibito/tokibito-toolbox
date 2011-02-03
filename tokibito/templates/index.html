@@ -2,6 +2,10 @@
 
 {% block title %}Shinya Okano (tokibito / nullpobug){% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}css/main.css" type="text/css"/>
+{% endblock %}
+
 {% block header_title %}Shinya Okano (tokibito / nullpobug){% endblock %}
 
 {% block main %}
@@ -57,6 +61,7 @@ new TWTR.Widget({
 </div>
 
 <h3>Presentations</h3>
+{% if not presentation_objects %}
 <ul>
   {% for obj in presentation_objects %}
     <li>
@@ -65,6 +70,7 @@ new TWTR.Widget({
     </li>
   {% endfor %}
 </ul>
+{% endif %}
 
 <h3>Books</h3>
 <div class="amazon">
