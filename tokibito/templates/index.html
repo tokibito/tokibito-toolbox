@@ -3,7 +3,11 @@
 {% block title %}Shinya Okano (tokibito / nullpobug){% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{{ MEDIA_URL }}css/main.css" type="text/css"/>
+<link type="text/css" rel="stylesheet" media="only screen and (max-device-width:480px)" href="{{ MEDIA_URL }}css/smartphone.css"/>
+<link type="text/css" rel="stylesheet" media="screen and (min-device-width:481px)" href="{{ MEDIA_URL }}css/main.css"/>
+<script type="text/javascript">
+var isSmartPhone = (navigator.userAgent.match(/Android|iPhone/) != null);
+</script>
 {% endblock %}
 
 {% block header_title %}Shinya Okano (tokibito / nullpobug){% endblock %}
@@ -13,7 +17,7 @@
 <p>I am a computer programmer in Japan.</p>
 <script type="text/javascript" src="http://widgets.twimg.com/j/2/widget.js"></script>
 <script type="text/javascript">
-new TWTR.Widget({
+var widgetConfig = {
   version: 2,
   type: 'profile',
   rpp: 4,
@@ -40,7 +44,12 @@ new TWTR.Widget({
     avatars: true,
     behavior: 'all'
   }
-}).render().setUser('tokibito').start();
+};
+if (isSmartPhone) {
+  widgetConfig.width = 305;
+  widgetConfig.height = 100;
+}
+new TWTR.Widget(widgetConfig).render().setUser('tokibito').start();
 </script>
 
 <h2>Accounts</h2>
@@ -65,7 +74,7 @@ new TWTR.Widget({
   {% for obj in presentation_objects %}
     <li>
       <a href="/presentation/{{ obj.slug }}.html">{{ obj.title }}</a> ({{ obj.created_at|date:"Y/m/d H:i" }})
-      {% if forloop.first %}<br/><iframe src="/presentation/{{ obj.slug }}.html" width="400" height="300"></iframe>{% endif %}
+      {% if not is_smartphone %}{% if forloop.first %}<br/><iframe src="/presentation/{{ obj.slug }}.html"width="400" height="300"></iframe>{% endif %}{% endif %}
     </li>
   {% endfor %}
 </ul>

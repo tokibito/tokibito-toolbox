@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<!DOCTYPE html>
+<html lang="ja">
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=320, user-scalable=no">
     <link rel="shortcut icon" href="{{ MEDIA_URL }}img/favicon.ico" type="image/x-icon" />
     <title>{{ object.title }}</title>
     <style type="text/css">
@@ -21,7 +21,6 @@
     </script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/s6/s6.js"></script>
     <script type="text/javascript">
-    // <![CDATA[
 
     s6.attach(s6, 'ready', function ready() {
       // h1 element wrapping
@@ -121,13 +120,13 @@
 
         s6.attach(document,   'keypress Right', 'step', 0, pr);
         s6.attach(document,   'keypress Left',  'prev', 0, pr);
-        s6.attach(document,   'keypress Up',    function() { pr.go('index') });
+        s6.attach(document,   'keypress Up',    function() { pr.go('index'); });
         s6.attach(document,   'keypress Down',  'back', 0, pr);
+        s6.attach(document,   'click',  'step', 0, pr);
     });
     setInterval(function() {
         document.cookie = 'page=' + pr.index;
     }, 1000);
-    // ]]>
     </script>
   </head>
 
