@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Shinya Okano (tokibito / nullpobug){% endblock %}
+{% block title %}Shinya Okano (tokibito / nullpobug) 岡野真也{% endblock %}
 
 {% block extra_head %}
 <link type="text/css" rel="stylesheet" media="only screen and (max-device-width:480px)" href="{{ MEDIA_URL }}css/smartphone.css"/>
@@ -10,7 +10,7 @@ var isSmartPhone = (navigator.userAgent.match(/Android|iPhone/) != null);
 </script>
 {% endblock %}
 
-{% block header_title %}Shinya Okano (tokibito / nullpobug){% endblock %}
+{% block header_title %}Shinya Okano (tokibito / nullpobug) 岡野真也{% endblock %}
 
 {% block main %}
 <h2>About</h2>
@@ -61,6 +61,11 @@ new TWTR.Widget(widgetConfig).render().setUser('tokibito').start();
   <li><strong>Vector</strong>: <a href="http://www.vector.co.jp/vpack/browse/person/an028567.html">作者: 岡野 真也</a></li>
 </ul>
 
+<h2>Works</h2>
+<ul>
+  <li><a href="http://www.beproud.jp/">株式会社ビープラウド</a></li>
+</ul>
+
 <h3>Photos</h3>
 <div>
   <img src="http://static2.nullpobug.com.s3.amazonaws.com/public/img/okano1.jpg" width="175" height="175" alt="21 years old"/>
@@ -74,7 +79,7 @@ new TWTR.Widget(widgetConfig).render().setUser('tokibito').start();
   {% for obj in presentation_objects %}
     <li>
       <a href="/presentation/{{ obj.slug }}.html">{{ obj.title }}</a> ({{ obj.created_at|date:"Y/m/d H:i" }})
-      {% if not is_smartphone %}{% if forloop.first %}<br/><iframe src="/presentation/{{ obj.slug }}.html"width="400" height="300"></iframe>{% endif %}{% endif %}
+      {% if not is_smartphone %}{% if forloop.first %}<br/><iframe src="/presentation/{{ obj.slug }}.html" width="400" height="300"></iframe>{% endif %}{% endif %}
     </li>
   {% endfor %}
 </ul>
