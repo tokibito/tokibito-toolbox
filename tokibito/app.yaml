@@ -1,7 +1,8 @@
-application: tokibito
+application: tokibito-hrd
 version: 1
-runtime: python
+runtime: python27
 api_version: 1
+threadsafe: true
 
 handlers:
 - url: /robots\.txt
@@ -18,8 +19,20 @@ handlers:
   static_dir: static/css
 
 - url: /presentation/create
-  script: main.py
+  script: main.application
   login: admin
 
 - url: .*
-  script: main.py
+  script: main.application
+
+builtins:
+- datastore_admin: on
+- deferred: on
+- appstats: on
+- remote_api: on
+
+libraries:
+- name: webob
+  version: latest
+- name: django
+  version: latest

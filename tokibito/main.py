@@ -10,16 +10,21 @@ def get_traceback(exc_info):
     except UnicodeDecodeError:
         return ret
 
-def main():
+
+def application(environ, start_response):
     # logging exception
     try:
         from tokky.entrypoint import get_root_application
         root_application = get_root_application()
-        util.run_wsgi_app(root_application)
+        return root_application(environ, start_response)
     except Exception, e:
         import logging
         logging.error(get_traceback(sys.exc_info()))
         raise
+
+def main():
+    util.run_wsgi_app(application)
+
 
 if __name__ == '__main__':
     main()
