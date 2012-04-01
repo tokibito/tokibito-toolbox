@@ -1,3 +1,4 @@
+import sys
 import re
 
 from google.appengine.ext import webapp
@@ -13,7 +14,8 @@ class TopPageHandler(TemplatePageHandler):
         from apps.presentation import api as presentation_api
         return {
             'is_smartphone': bool(RE_UA_SMARTPHONE.search(self.request.user_agent)),
-            'presentation_objects': presentation_api.get_presentation_all()
+            'presentation_objects': presentation_api.get_presentation_all(),
+            'sys_version': sys.version,
         }
 
 application = webapp.WSGIApplication([(r'/', TopPageHandler)])

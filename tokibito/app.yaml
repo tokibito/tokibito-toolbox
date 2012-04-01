@@ -26,7 +26,6 @@ handlers:
   script: main.application
 
 builtins:
-- datastore_admin: on
 - deferred: on
 - appstats: on
 - remote_api: on
