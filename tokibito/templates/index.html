@@ -74,6 +74,22 @@ new TWTR.Widget(widgetConfig).render().setUser('tokibito').start();
   <img src="http://static2.nullpobug.com.s3.amazonaws.com/public/img/cb400sf.jpg" width="150" height="113" alt="Honda CB400SF"/>
 </div>
 
+<h2>Events</h2>
+<ul id="events_list"></ul>
+<script type="text/javascript">
+(function() {
+  $.getJSON("http://connpass.com/api/v1/event/?owner_nickname=tokibito&callback=?", function(response) {
+    for (var i = 0; i < response.events.length; i++) {
+      var e = response.events[i];
+      var date = new Date(e.started_at);
+      var date_str = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+      var elem = $("<li/>").html("<a href='" + e.event_url + "'>" + e.title + "</a> " + date_str);
+      $("#events_list").append(elem);
+    }
+  });
+})();
+</script>
+
 <h3>Presentations</h3>
 <ul>
   {% for obj in presentation_objects %}
